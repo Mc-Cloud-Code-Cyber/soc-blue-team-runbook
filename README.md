@@ -1,2 +1,11 @@
-# soc-blue-team-runbook
-Runbook, procedures, and resources for SOC Blue Team operations
+# SOC Blue Team Runbook
+
+Runbook, playbooks, cheat sheets, and procedures for Security Operations Center (SOC) blue teamers.
+
+## Sections
+- [Incident Response](incident-response/)
+- [Monitoring](monitoring/)
+- [Cheat Sheets](cheat-sheets/)
+- [Playbooks](playbooks/)
+- [Tools](tools/)
+- [Resources](resources.md)
