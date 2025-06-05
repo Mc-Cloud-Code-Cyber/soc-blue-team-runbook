@@ -1,73 +1,63 @@
-Linux Command Cheat Sheet for SOC Blue Team
-Basic Navigation
-pwd — Print working directory
-ls -alh — List files (long format, human-readable)
-cd /path/dir — Change directory
-find . -name "*.log" — Find files by name
-
-User & Process Management
-whoami — Current user
-id — User and group info
-ps aux — All running processes
-top — Real-time process list
-htop — Improved process viewer (may require install)
-kill -9 PID — Force kill a process by PID
-
-File & Directory Operations
-cat file.txt — Show file contents
-less file.txt — View file contents (scroll)
-tail -n 100 file.log — Last 100 lines of file
-head -n 20 file.log — First 20 lines of file
-grep "pattern" file — Search for pattern in file
-cp src dest — Copy file
-mv old new — Move/rename file
-rm file.txt — Delete file
-
-Network Commands
-ifconfig — Show network interfaces (legacy)
-ip a — Show interfaces (modern)
-ping 8.8.8.8 — Test network connectivity
-netstat -tuln — Show listening ports (may require install)
-ss -tuln — Show listening ports (modern)
-lsof -i — List open ports/services
-curl ifconfig.me — External IP address
-
-Disk Usage & System Info
-df -h — Disk space usage (human readable)
-du -sh /path — Size of directory
-free -h — RAM usage
-uname -a — System/kernel info
-uptime — System uptime/load
-dmesg | tail — Latest kernel/system messages
-
-Log Analysis
-less /var/log/syslog — View system log (Debian/Ubuntu)
-less /var/log/messages — View system log (RHEL/CentOS)
-journalctl -xe — Systemd logs (modern)
-grep "ERROR" /var/log/app.log — Search for errors in logs
-
-File Permissions & Ownership
-ls -l — Show permissions
-chmod 644 file.txt — Set permissions (rw-r--r--)
-chown user:group file — Change owner/group
-
-Useful One-Liners
-grep -ir "keyword" /var/log — Case-insensitive search in logs
-find / -type f -mtime -1 — Files changed in last 1 day
-awk '{print $1,$2}' file.txt — Print first two columns of file
-
-Incident Response
-last — Last logins
-w — Who is logged in now
-history — Bash command history
-sudo su — Switch to root (if permitted)
-
-Package Management
-
-Debian/Ubuntu:
-sudo apt update && sudo apt upgrade
-sudo apt install package
-
-RHEL/CentOS:
-sudo yum update
-sudo yum install package
+| **Category**             | **Command**                            | **Description / Example**                                   |                                       |                                         |
+| ------------------------ | -------------------------------------- | ----------------------------------------------------------- | ------------------------------------- | --------------------------------------- |
+| **Navigation**           | `pwd`                                  | Print current directory                                     |                                       |                                         |
+|                          | `ls -alh`                              | List all files with details, human-readable sizes           |                                       |                                         |
+|                          | `cd /var/log`                          | Change to /var/log directory                                |                                       |                                         |
+|                          | `find . -name "*.log"`                 | Find all .log files in current directory and subdirectories |                                       |                                         |
+|                          | `tree`                                 | Visual directory tree (may need install)                    |                                       |                                         |
+| **User & Process**       | `whoami`                               | Show current user                                           |                                       |                                         |
+|                          | `id`                                   | Show user and group info                                    |                                       |                                         |
+|                          | `ps aux`                               | Show all running processes                                  |                                       |                                         |
+|                          | `top`                                  | Live updating list of processes                             |                                       |                                         |
+|                          | `htop`                                 | Enhanced top (needs install: `sudo apt install htop`)       |                                       |                                         |
+|                          | `kill -9 PID`                          | Force kill process (replace PID with process ID)            |                                       |                                         |
+|                          | `pkill -u user`                        | Kill all processes from a user                              |                                       |                                         |
+| **File & Directory Ops** | `cat /etc/passwd`                      | Print contents of passwd file                               |                                       |                                         |
+|                          | `less file.txt`                        | Scroll/view file                                            |                                       |                                         |
+|                          | `tail -f /var/log/auth.log`            | Live follow a log file                                      |                                       |                                         |
+|                          | `head -n 50 big.log`                   | Show first 50 lines                                         |                                       |                                         |
+|                          | `grep "error" /var/log/syslog`         | Find 'error' in syslog                                      |                                       |                                         |
+|                          | `cp important.conf /backup/`           | Copy file to backup                                         |                                       |                                         |
+|                          | `mv test.log archive.log`              | Rename file                                                 |                                       |                                         |
+|                          | `rm -rf oldfolder/`                    | Remove folder and all contents                              |                                       |                                         |
+| **Network**              | `ifconfig`                             | Show network interfaces (legacy)                            |                                       |                                         |
+|                          | `ip a`                                 | Show all network interfaces (modern)                        |                                       |                                         |
+|                          | `ping -c 4 8.8.8.8`                    | Ping Google DNS 4 times                                     |                                       |                                         |
+|                          | `netstat -tulnp`                       | Show all listening ports with program names                 |                                       |                                         |
+|                          | `ss -tuln`                             | Show listening TCP/UDP ports                                |                                       |                                         |
+|                          | `lsof -i :22`                          | Show processes using port 22                                |                                       |                                         |
+|                          | `curl ifconfig.me`                     | Get public IP address                                       |                                       |                                         |
+|                          | `traceroute google.com`                | Trace route to Google (may need install)                    |                                       |                                         |
+| **System/Disk Info**     | `df -h`                                | Show disk usage (human readable)                            |                                       |                                         |
+|                          | `du -sh /var/log`                      | Show size of /var/log directory                             |                                       |                                         |
+|                          | `free -h`                              | Show RAM usage                                              |                                       |                                         |
+|                          | `uname -a`                             | Show kernel/system info                                     |                                       |                                         |
+|                          | `uptime`                               | How long system has been running                            |                                       |                                         |
+|                          | \`dmesg                                | tail -20\`                                                  | Last 20 kernel messages               |                                         |
+|                          | `lsblk`                                | List block devices (disks/partitions)                       |                                       |                                         |
+| **Log Analysis**         | `less /var/log/syslog`                 | View system log (Debian/Ubuntu)                             |                                       |                                         |
+|                          | `less /var/log/messages`               | View system log (RHEL/CentOS)                               |                                       |                                         |
+|                          | `journalctl -xe`                       | View latest systemd logs                                    |                                       |                                         |
+|                          | `grep -i "fail" /var/log/auth.log`     | Find 'fail' in auth log, case-insensitive                   |                                       |                                         |
+|                          | \`zcat /var/log/syslog.1.gz            | grep ERROR\`                                                | Search compressed logs                |                                         |
+|                          | `awk '{print $1, $5}' /var/log/syslog` | Print first and fifth columns from syslog                   |                                       |                                         |
+| **Permissions**          | `ls -l`                                | List files with permissions                                 |                                       |                                         |
+|                          | `chmod 750 script.sh`                  | Set script permissions to rwxr-x---                         |                                       |                                         |
+|                          | `chown analyst:analyst incident.txt`   | Change owner and group                                      |                                       |                                         |
+|                          | `sudo`                                 | Run command as superuser                                    |                                       |                                         |
+| **One-Liners & Tricks**  | `grep -ir "keyword" /var/log`          | Case-insensitive search for keyword in logs                 |                                       |                                         |
+|                          | `find / -type f -mtime -1 2>/dev/null` | Files modified in last day                                  |                                       |                                         |
+|                          | `awk '{print $1,$2}' file.txt`         | Print first two columns of file                             |                                       |                                         |
+|                          | `cut -d: -f1 /etc/passwd`              | Show all usernames on system                                |                                       |                                         |
+|                          | \`sort file.txt                        | uniq -c                                                     | sort -nr\`                            | Count unique lines, sorted by frequency |
+| **Incident Response**    | `last`                                 | Show last logins                                            |                                       |                                         |
+|                          | `w`                                    | Who is logged in now                                        |                                       |                                         |
+|                          | \`history                              | tail -20\`                                                  | Last 20 commands run                  |                                         |
+|                          | `sudo su`                              | Become root (if permitted)                                  |                                       |                                         |
+|                          | `crontab -l`                           | List user cron jobs                                         |                                       |                                         |
+|                          | `lsattr file.txt`                      | Show special file attributes                                |                                       |                                         |
+|                          | \`strings suspicious.bin               | less\`                                                      | Show printable strings in binary file |                                         |
+| **Package Management**   | `sudo apt update && sudo apt upgrade`  | Update/upgrade (Debian/Ubuntu)                              |                                       |                                         |
+|                          | `sudo apt install nmap`                | Install package (Debian/Ubuntu)                             |                                       |                                         |
+|                          | `sudo yum update`                      | Update (RHEL/CentOS)                                        |                                       |                                         |
+|                          | `sudo yum install nmap`                | Install package (RHEL/CentOS)                               |                                       |                                         |
