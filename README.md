@@ -1,4 +1,4 @@
-# SOC Blue Team Runbook
+# SOC Blue Team
 
 Runbook, playbooks, cheat sheets, and procedures for Security Operations Center (SOC) blue teamers.
 
